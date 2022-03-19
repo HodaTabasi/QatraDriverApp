@@ -18,6 +18,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     return Scaffold(
         backgroundColor: const Color(0xffF5F5F7),
         appBar: CustomAppBar("تفاصيل الطلب"),
+
         body: ProgressHUD(child: Body()));
   }
 
