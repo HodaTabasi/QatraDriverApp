@@ -45,14 +45,14 @@ class _BodyState extends State<Body> {
     setState(() {
       isLoading = true;
     });
-    LoginResponse response =
+    LoginResponse? response =
     await HttpService.apiHelper.login(userName, password);
 
 
-    if (response.status) {
+    if (response!.status!) {
       SharedPrefrencesHelper.sharedPrefrencesHelper.setIsLogin(true);
       SharedPrefrencesHelper.sharedPrefrencesHelper
-          .setToken(response.data.token.accessToken);
+          .setToken(response.data!.token!.accessToken!);
 
       setState(() {
         isLoading = false;
@@ -69,7 +69,7 @@ class _BodyState extends State<Body> {
         isLoading = false;
       });
       Fluttertoast.showToast(
-          msg: response.message.first,
+          msg: response.message!.first,
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,

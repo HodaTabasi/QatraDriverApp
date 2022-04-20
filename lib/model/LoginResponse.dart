@@ -1,9 +1,9 @@
 import 'User.dart';
 
 class LoginResponse {
-  bool status;
-  Data data;
-  List<String> message;
+  bool? status;
+  Data? data;
+  List<String>? message;
 
   LoginResponse({this.status, this.data, this.message});
 
@@ -13,7 +13,7 @@ class LoginResponse {
     if (json['message'] != null) {
       message = <String>[];
       json['message'].forEach((v) {
-        message.add(v);
+        message!.add(v);
       });
     }
   }
@@ -22,18 +22,18 @@ class LoginResponse {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
     if (this.data != null) {
-      data['data'] = this.data.toJson();
+      data['data'] = this.data!.toJson();
     }
     if (this.message != null) {
-      data['message'] = this.message.map((v) => v).toList();
+      data['message'] = this.message!.map((v) => v).toList();
     }
     return data;
   }
 }
 
 class Data {
-  Token token;
-  User user;
+  Token? token;
+  User? user;
 
   Data({this.token, this.user});
 
@@ -45,19 +45,19 @@ class Data {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.token != null) {
-      data['token'] = this.token.toJson();
+      data['token'] = this.token!.toJson();
     }
     if (this.user != null) {
-      data['user'] = this.user.toJson();
+      data['user'] = this.user!.toJson();
     }
     return data;
   }
 }
 
 class Token {
-  String accessToken;
-  String tokenType;
-  int expiresIn;
+  String? accessToken;
+  String? tokenType;
+  int? expiresIn;
 
   Token({this.accessToken, this.tokenType, this.expiresIn});
 

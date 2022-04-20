@@ -21,8 +21,8 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  double _width;
-  OrderDetailsResponse orderDetailsResponse;
+  double? _width;
+  OrderDetailsResponse? orderDetailsResponse;
   bool isLoading = false;
 
   final List<Image> _icons = [
@@ -34,13 +34,13 @@ class _BodyState extends State<Body> {
   final List<String> _titles = ["استيلام الماء", "تسليم المياه", "الصورة"];
   int _curStep = 2;
   final Color _activeColor = const Color(0xff0D2784);
-  final Color _inactiveColor = Colors.grey[100];
+  final Color? _inactiveColor = Colors.grey[100];
   final double lineWidth = 3.0;
 
   getData() async {
     int id = Provider.of<OrderProvider>(context, listen: false).orderId;
     orderDetailsResponse = await HttpService.apiHelper.getOrderDetails(id);
-    if (orderDetailsResponse.status) {
+    if (orderDetailsResponse!.status!) {
       setState(() {
         isLoading = true;
         putStep();
@@ -49,7 +49,7 @@ class _BodyState extends State<Body> {
   }
 
   putStep() {
-    switch (orderDetailsResponse.data.status) {
+    switch (orderDetailsResponse!.data!.status) {
       case "Reserved":
         _curStep = 2;
         break;
@@ -72,14 +72,14 @@ class _BodyState extends State<Body> {
   onPress() async {
     // final progress = ProgressHUD.of(context);
 
-    print(orderDetailsResponse.data.status);
-    switch (orderDetailsResponse.data.status) {
+    print(orderDetailsResponse!.data!.status);
+    switch (orderDetailsResponse!.data!.status) {
       case "Reserved":
         // progress.show();
         Provider.of<OrderProvider>(context, listen: false).changeLoading(true);
-        MainResponse response = await HttpService.apiHelper
-            .receivedOrder(orderDetailsResponse.data.id);
-        if (response.status) {
+        MainResponse? response = await HttpService.apiHelper
+            .receivedOrder(orderDetailsResponse!.data!.id);
+        if (response!.status!) {
           // progress.dismiss();
           Provider.of<OrderProvider>(context, listen: false)
               .changeLoading(false);
@@ -105,7 +105,7 @@ class _BodyState extends State<Body> {
               .changeLoading(false);
           Get.snackbar(
             "",
-            response.message.first,
+            response.message!.first,
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.red,
             colorText: Colors.white,
@@ -122,9 +122,9 @@ class _BodyState extends State<Body> {
       case "Received":
         // progress.show();
         Provider.of<OrderProvider>(context, listen: false).changeLoading(true);
-        MainResponse response = await HttpService.apiHelper
-            .deliverOrder(orderDetailsResponse.data.id);
-        if (response.status) {
+        MainResponse? response = await HttpService.apiHelper
+            .deliverOrder(orderDetailsResponse!.data!.id);
+        if (response!.status!) {
           // progress.dismiss();
           Provider.of<OrderProvider>(context, listen: false)
               .changeLoading(false);
@@ -136,7 +136,7 @@ class _BodyState extends State<Body> {
               .changeLoading(false);
           Get.snackbar(
             "",
-            response.message.first,
+            response.message!.first,
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.red,
             colorText: Colors.white,
@@ -175,7 +175,7 @@ class _BodyState extends State<Body> {
                         margin: const EdgeInsets.all(8.0),
                         child: Column(
                           children: [
-                            OrderDeiItem(orderDetailsResponse.data),
+                            OrderDeiItem(orderDetailsResponse!.data!),
                             const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Divider(
@@ -211,12 +211,12 @@ class _BodyState extends State<Body> {
                                   )),
                             ),
                             //
-                            orderDetailsResponse.data.image != null
+                            orderDetailsResponse!.data!.image != null
                                 ? ClipRRect(
                                     borderRadius: BorderRadius.circular(15.0),
                                     child: Image.network(
                                       "https://portal.qatrahksa.com/" +
-                                          orderDetailsResponse.data.image,
+                                          orderDetailsResponse!.data!.image,
                                       height: 152,
                                       width: 300,
                                       fit: BoxFit.cover,
@@ -232,7 +232,7 @@ class _BodyState extends State<Body> {
                     ),
                     Opacity(
                       child: BtnLayout("تأكيد", () => onPress()),
-                      opacity: orderDetailsResponse.data.status == "Delivered"
+                      opacity: orderDetailsResponse!.data!.status == "Delivered"
                           ? 0.0
                           : 1.0,
                     )
@@ -268,7 +268,7 @@ class _BodyState extends State<Body> {
               color: circleColor,
               borderRadius: BorderRadius.all(Radius.circular(25.0)),
               border: Border.all(
-                color: _inactiveColor,
+                color: _inactiveColor!,
                 width: 2.0,
               ),
               boxShadow: const [
@@ -307,16 +307,16 @@ class _BodyState extends State<Body> {
   }
 
   void takePhoto() async {
-    PickedFile pickedFile = await ImagePicker()
+    PickedFile? pickedFile = await ImagePicker()
         // ignore: deprecated_member_use
         .getImage(source: ImageSource.camera);
 
     // progress.show();
     Provider.of<OrderProvider>(context, listen: false).changeLoading(true);
-    MainResponse response = await HttpService.apiHelper
-        .proofOrder(orderDetailsResponse.data.id, File(pickedFile.path));
+    MainResponse? response = await HttpService.apiHelper
+        .proofOrder(orderDetailsResponse!.data!.id, File(pickedFile!.path));
 
-    if (response.status) {
+    if (response!.status!) {
       Provider.of<OrderProvider>(context, listen: false).changeLoading(false);
       // progress.dismiss();
       Get.snackbar(
@@ -339,7 +339,7 @@ class _BodyState extends State<Body> {
       Provider.of<OrderProvider>(context, listen: false).changeLoading(false);
       Get.snackbar(
         "",
-        response.message.first,
+        response.message!.first,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.red,
         colorText: Colors.white,

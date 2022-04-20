@@ -3,7 +3,7 @@ import 'package:qatar_driver_app/model/Order.dart';
 
 class OrderDeiItem extends StatelessWidget {
   Order data;
-  OrderDeiItem(this.data, {Key key}) : super(key: key);
+  OrderDeiItem(this.data);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class OrderDeiItem extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              data.mosqueName,
+              data.mosqueName!,
               style: const TextStyle(
                   color: Color(0xff0D2784),
                   fontSize: 14,
@@ -76,7 +76,7 @@ class OrderDeiItem extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    data.status,
+                    data.status!,
                     style: const TextStyle(
                         color: Color(0xff00DAFD),
                         fontWeight: FontWeight.bold,

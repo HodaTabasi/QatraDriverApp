@@ -12,7 +12,7 @@ class Extra extends StatefulWidget {
 }
 
 class _ExtraState extends State<Extra> {
-  SettingResponse response;
+  SettingResponse? response;
   bool _isloading = false;
 
   onCreate() async {
@@ -37,8 +37,8 @@ class _ExtraState extends State<Extra> {
             ? Padding(
               padding: const EdgeInsets.all(16.0),
               child: Container(
-                  child: response.status
-                      ? Text(response.data.value != null ? response.data.value : " ")
+                  child: response!.status!
+                      ? Text(response!.data!.value!)
                       : Text("something error"),
                 ),
             )

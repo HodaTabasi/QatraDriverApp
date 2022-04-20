@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import '../constant.dart';
 
 class CustomDialogBox extends StatefulWidget {
-  final String title, descriptions, text;
-  final Image img;
+  final String? title, descriptions, text;
+  final Image? img;
 
-  const CustomDialogBox({Key key, this.title, this.descriptions, this.text, this.img}) : super(key: key);
+  const CustomDialogBox({this.title, this.descriptions, this.text, this.img});
 
   @override
   _CustomDialogBoxState createState() => _CustomDialogBoxState();
@@ -49,7 +49,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
             children: <Widget>[
               Image.asset("assets/like.png"),
               SizedBox(height: 15,),
-              Text(widget.title,style: TextStyle(fontSize: 22,fontWeight: FontWeight.w600),),
+              Text(widget.title!,style: TextStyle(fontSize: 22,fontWeight: FontWeight.w600),),
               SizedBox(height: 15,),
               // Text(widget.descriptions,style: TextStyle(fontSize: 14),textAlign: TextAlign.center,),
               // SizedBox(height: 22,),

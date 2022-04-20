@@ -5,7 +5,7 @@ import 'CustomDialogBox.dart';
 
 class BtnLayout extends StatelessWidget {
   String title;
-  Function prsee;
+  VoidCallback prsee;
 
   BtnLayout(this.title,this.prsee);
 

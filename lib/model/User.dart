@@ -1,15 +1,15 @@
 class User {
-  int id;
-  String firstName;
-  String lastName;
-  String email;
-  String password;
-  String phone;
-  String city;
-  String address;
-  bool isBan;
-  String createdAt;
-  String updatedAt;
+  int? id;
+  String? firstName;
+  String? lastName;
+  String? email;
+  String? password;
+  String? phone;
+  String? city;
+  String? address;
+  bool? isBan;
+  String? createdAt;
+  String? updatedAt;
 
   User(
       {this.id,

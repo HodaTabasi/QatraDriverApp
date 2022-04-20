@@ -14,9 +14,9 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> with TickerProviderStateMixin {
-  AnimationController animation;
+  AnimationController? animation;
 
-  Animation<double> _fadeInFadeOut;
+  Animation<double>? _fadeInFadeOut;
 
   @override
   void initState() {
@@ -25,11 +25,11 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
       vsync: this,
       duration: Duration(seconds: 2),
     );
-    _fadeInFadeOut = Tween<double>(begin: 0.0, end: 0.8).animate(animation);
+    _fadeInFadeOut = Tween<double>(begin: 0.0, end: 0.8).animate(animation!);
 
-    animation.addStatusListener((status) {
+    animation!.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        bool isLoadong =
+        bool? isLoadong =
             SharedPrefrencesHelper.sharedPrefrencesHelper.getIsLogin();
         isLoadong != null
             ? isLoadong
@@ -44,7 +44,7 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
       //   animation.forward();
       // }
     });
-    animation.forward();
+    animation!.forward();
   }
 
   @override
@@ -59,7 +59,7 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
         ),
         child: Center(
           child: FadeTransition(
-            opacity: _fadeInFadeOut,
+            opacity: _fadeInFadeOut!,
             child: Image.asset(
               "assets/logo1.png",
               width: 200,
@@ -72,7 +72,7 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
   @override
   dispose() {
     // you need this
-    animation.dispose();
+    animation!.dispose();
     super.dispose();
   }
 }

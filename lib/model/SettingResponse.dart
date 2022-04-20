@@ -1,7 +1,7 @@
 class SettingResponse {
-  bool status;
-  Data data;
-  List<String> message;
+  bool? status;
+  Data? data;
+  List<String>? message;
 
   SettingResponse({this.status, this.data, this.message});
 
@@ -11,7 +11,7 @@ class SettingResponse {
     if (json['message'] != null) {
       message = <String>[];
       json['message'].forEach((v) {
-        message.add(v);
+        message!.add(v);
       });
     }
   }
@@ -20,17 +20,17 @@ class SettingResponse {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
     if (this.data != null) {
-      data['data'] = this.data.toJson();
+      data['data'] = this.data!.toJson();
     }
     if (this.message != null) {
-      data['message'] = this.message.map((v) => v).toList();
+      data['message'] = this.message!.map((v) => v).toList();
     }
     return data;
   }
 }
 
 class Data {
-  String value;
+  String? value;
 
   Data({this.value});
 

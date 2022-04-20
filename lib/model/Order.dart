@@ -1,9 +1,9 @@
 class Order {
-  int id;
+  int? id;
   var orderNo;
   var userId;
   var mosqueType;
-  String status;
+  String? status;
   var quantity;
   var mosqueId;
   var receiverId;
@@ -13,10 +13,10 @@ class Order {
   var finalPrice;
   var priceBeforeDiscount;
   var priceAfterDiscount;
-  String productName;
-  String productDescription;
+  String? productName;
+  String? productDescription;
   var countCartoons;
-  String mosqueName;
+  String? mosqueName;
 
   Order(
       {this.id,

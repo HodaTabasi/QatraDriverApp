@@ -15,11 +15,11 @@ class MyOrderBody extends StatefulWidget {
 
 class _MyOrderBodyState extends State<MyOrderBody> {
   bool isLoading = false;
-  OrderResponse response;
+  OrderResponse? response;
 
   getData() async {
     response = await HttpService.apiHelper.getMyOrders();
-    if(response.status){
+    if(response!.status!){
       setState(() {
         isLoading = true;
       });
@@ -44,10 +44,10 @@ class _MyOrderBodyState extends State<MyOrderBody> {
               horizontal: getProportionateScreenWidth(20)),
           child: ListView.builder(
             shrinkWrap: true,
-            itemCount: response.data.isEmpty ? 0 : response.data.length,
+            itemCount: response!.data!.isEmpty ? 0 : response!.data!.length,
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
-              child: MyOrderItem(response.data[index]),
+              child: MyOrderItem(response!.data![index]),
             ),
           ),
         ),

@@ -50,7 +50,7 @@ class OrderItem extends StatelessWidget {
               Padding(
                 padding:const EdgeInsets.all(8.0),
                 child: Text(
-                  order.mosqueName,
+                  order.mosqueName!,
                   style: const TextStyle(
                       color: Color(0xff0D2784),
                       fontSize: 14,
@@ -93,9 +93,9 @@ class OrderItem extends StatelessWidget {
                           // final progress = ProgressHUD.of(context);
                           Provider.of<MainProvider>(context, listen: false).changeLoading(true);
                           // progress.show();
-                          MainResponse response = await HttpService.apiHelper
+                          MainResponse? response = await HttpService.apiHelper
                               .driverDeceivedOrder(order.id);
-                          if (response.status) {
+                          if (response!.status!) {
                             // progress.dismiss();
                             Provider.of<MainProvider>(context, listen: false).changeLoading(false);
                             Get.snackbar(
@@ -116,7 +116,7 @@ class OrderItem extends StatelessWidget {
                             Provider.of<MainProvider>(context, listen: false).changeLoading(false);
                             Get.snackbar(
                               "",
-                              response.message.first,
+                              response.message!.first,
                               snackPosition: SnackPosition.BOTTOM,
                               backgroundColor: Colors.red,
                               colorText: Colors.white,
@@ -163,7 +163,7 @@ class OrderItem extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        order.status,
+                        order.status!,
                         style: const TextStyle(
                             color: Color(0xff00DAFD),
                             fontWeight: FontWeight.bold,

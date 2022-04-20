@@ -1,7 +1,7 @@
 class MainResponse {
-  bool status;
-  List<String> data;
-  List<String> message;
+  bool? status;
+  List<String>? data;
+  List<String>? message;
 
   MainResponse({this.status, this.data, this.message});
 
@@ -10,13 +10,13 @@ class MainResponse {
     if (json['data'] != null) {
       data = <String>[];
       json['data'].forEach((v) {
-        data.add(v);
+        data!.add(v);
       });
     }
     if (json['message'] != null) {
       message = <String>[];
       json['message'].forEach((v) {
-        message.add(v);
+        message!.add(v);
       });
     }
   }
@@ -25,10 +25,10 @@ class MainResponse {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
     if (this.data != null) {
-      data['data'] = this.data.map((v) => v).toList();
+      data['data'] = this.data!.map((v) => v).toList();
     }
     if (this.message != null) {
-      data['message'] = this.message.map((v) => v).toList();
+      data['message'] = this.message!.map((v) => v).toList();
     }
     return data;
   }

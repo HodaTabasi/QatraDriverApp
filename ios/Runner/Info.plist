@@ -43,7 +43,10 @@
 	<false/>
 
 	<key>NSPhotoLibraryUsageDescription</key>
+	<string>take picture from mobile or phone</string>
 	<key>NSCameraUsageDescription</key>
+	<string>take picture from mobile or phone</string>
 	<key>NSMicrophoneUsageDescription</key>
+	<string>take picture from mobile or phone</string>
 </dict>
 </plist>

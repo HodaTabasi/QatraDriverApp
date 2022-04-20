@@ -10,7 +10,7 @@ import 'package:qatar_driver_app/model/SettingResponse.dart';
 import 'package:qatar_driver_app/screens/login/loginbyemail_screen.dart';
 
 class HttpService {
-  Dio _dio;
+  late Dio _dio;
 
   // final baseUrl = "http://qatra.pal-dev.com/api/";
   final baseUrl = "https://portal.qatrahksa.com/api/";
@@ -37,7 +37,7 @@ class HttpService {
     ));
   }
 
-  Future<LoginResponse> login(String userName, String password) async {
+  Future<LoginResponse?> login(String userName, String password) async {
     try {
       Response response = await _dio.post(baseUrl + 'driver/auth/login',
           data: {'email': userName, 'password': password},
@@ -54,7 +54,7 @@ class HttpService {
     }
   }
 
-  Future<OrderResponse> getHome(context) async {
+  Future<OrderResponse?> getHome(context) async {
     try {
       Response response = await _dio.get(baseUrl + 'driver/orders',
           options: Options(headers: {
@@ -73,7 +73,7 @@ class HttpService {
                     (_) => false,
               );
             }
-            return status < 500;
+            return status! < 500;
           }));
 
       print(response.data);
@@ -87,7 +87,7 @@ class HttpService {
     }
   }
 
-  Future<OrderResponse> getMyOrders() async {
+  Future<OrderResponse?> getMyOrders() async {
     try {
       Response response = await _dio.get(baseUrl + 'driver/own-orders',
           options: Options(headers: {
@@ -107,7 +107,7 @@ class HttpService {
     }
   }
 
-  Future<MainResponse> receivedOrder(orderId) async {
+  Future<MainResponse?> receivedOrder(orderId) async {
     try {
       Response response = await _dio.post(baseUrl + 'driver/receive-order/$orderId',
           options: Options(headers: {
@@ -127,7 +127,7 @@ class HttpService {
     }
   }
 
-  Future<MainResponse> deliverOrder(orderId) async {
+  Future<MainResponse?> deliverOrder(orderId) async {
     try {
       Response response = await _dio.post(baseUrl + 'driver/deliver-order/$orderId',
           options: Options(headers: {
@@ -147,7 +147,7 @@ class HttpService {
     }
   }
 
-  Future<MainResponse> proofOrder(orderId ,file) async {
+  Future<MainResponse?> proofOrder(orderId ,file) async {
 
     String fileName = file.path.split('/').last;
     FormData formData = FormData.fromMap({
@@ -175,7 +175,7 @@ class HttpService {
     }
   }
 
-  Future<MainResponse> driverDeceivedOrder(orderId) async {
+  Future<MainResponse?> driverDeceivedOrder(orderId) async {
     try {
       Response response = await _dio.post(baseUrl + 'driver/reserve-order/$orderId',
           options: Options(
@@ -197,7 +197,7 @@ class HttpService {
   }
 
 
-  Future<SettingResponse> getSetting() async {
+  Future<SettingResponse?> getSetting() async {
     try {
       Response response = await _dio.get(baseUrl + 'user/settings',
           options: Options(headers: {
@@ -220,7 +220,7 @@ class HttpService {
     }
   }
 
-  Future<OrderDetailsResponse> getOrderDetails(int orderId) async {
+  Future<OrderDetailsResponse?> getOrderDetails(int orderId) async {
     try {
       Response response = await _dio.get(baseUrl + 'driver/order/$orderId',
           options: Options(headers: {

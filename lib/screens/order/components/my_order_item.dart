@@ -21,7 +21,7 @@ class MyOrderItem extends StatelessWidget {
       height: size.width * 0.4,
       child: GestureDetector(
         onTap: () {
-          Provider.of<OrderProvider>(context, listen: false).orderId = order.id;
+          Provider.of<OrderProvider>(context, listen: false).orderId = order.id!;
           Get.to(() => DetailsScreen(), transition: Transition.rightToLeft,
               curve: Curves.easeInOutCubic,
               duration: Duration(milliseconds: 550));
